@@ -1,0 +1,12 @@
+node_modules
+*.db
+*.db-wal
+*.db-shm
+.git
+.llm
+.env
+.DS_Store
+backend/data
+frontend/dist
+**/__tests__
+**/coverage
