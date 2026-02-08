@@ -60,32 +60,32 @@ export default function Listar() {
   };
 
   const inputClass =
-    'border border-navy-light rounded-md px-3 py-2 text-sm focus:outline-none focus:border-navy-blue focus:ring-1 focus:ring-navy-blue';
+    'border border-border rounded h-8 px-3 text-[13px] text-foreground bg-surface focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20';
+
+  const thClass = 'text-left py-2 px-3 text-[11px] font-semibold text-muted uppercase tracking-wide';
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-navy-dark text-2xl font-bold border-b-3 border-yellow-gov pb-2">
-        Listar Itens
-      </h2>
+    <div className="space-y-4">
+      <h2 className="text-foreground text-base font-semibold">Listar Itens</h2>
 
       {mensagem && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-2 rounded-md text-sm">
+        <div className="bg-alert-green border border-green-200 text-green-700 px-3 py-2 rounded text-[13px]">
           {mensagem}
         </div>
       )}
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2">
         <input
           type="text"
           placeholder="Buscar por nome..."
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          className={`${inputClass} w-64`}
+          className={`${inputClass} w-56`}
         />
         <select
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
-          className={`${inputClass} w-52`}
+          className={`${inputClass} w-44`}
         >
           <option value="">Todas as categorias</option>
           {CATEGORIAS.map((c) => (
@@ -95,48 +95,48 @@ export default function Listar() {
       </div>
 
       {loading ? (
-        <p className="text-gray-500">Carregando...</p>
+        <p className="text-muted text-[13px]">Carregando...</p>
       ) : itens.length === 0 ? (
-        <p className="text-gray-500">Nenhum item encontrado.</p>
+        <p className="text-muted text-[13px]">Nenhum item encontrado.</p>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="bg-surface border border-border rounded-md overflow-x-auto">
+          <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">ID</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Nome</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Categoria</th>
-                <th className="text-right py-3 px-3 text-navy-mid font-semibold">Qtd</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Unid</th>
-                <th className="text-right py-3 px-3 text-navy-mid font-semibold">Preço</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Lote</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Validade</th>
-                <th className="text-right py-3 px-3 text-navy-mid font-semibold">Est. Mín.</th>
-                <th className="text-center py-3 px-3 text-navy-mid font-semibold">Ações</th>
+              <tr className="border-b border-faint">
+                <th className={thClass}>ID</th>
+                <th className={thClass}>Nome</th>
+                <th className={thClass}>Categoria</th>
+                <th className={`${thClass} text-right`}>Qtd</th>
+                <th className={thClass}>Unid</th>
+                <th className={`${thClass} text-right`}>Preço</th>
+                <th className={thClass}>Lote</th>
+                <th className={thClass}>Validade</th>
+                <th className={`${thClass} text-right`}>Est. Mín.</th>
+                <th className={`${thClass} text-center`}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {itens.map((item) => (
-                <tr key={item.id} className={`${getRowClass(item)} border-b border-gray-100 hover:bg-gray-50/50`}>
-                  <td className="py-2 px-3">{item.id}</td>
-                  <td className="py-2 px-3 font-medium">{item.nome}</td>
-                  <td className="py-2 px-3">{item.categoria}</td>
-                  <td className="py-2 px-3 text-right">{item.quantidade}</td>
-                  <td className="py-2 px-3">{item.unidade}</td>
-                  <td className="py-2 px-3 text-right">{formatarMoeda(item.preco_unitario)}</td>
-                  <td className="py-2 px-3">{item.lote || '—'}</td>
-                  <td className="py-2 px-3">{formatarData(item.data_validade)}</td>
-                  <td className="py-2 px-3 text-right">{item.estoque_minimo}</td>
+                <tr key={item.id} className={`${getRowClass(item)} border-b border-faint last:border-0 hover:bg-black/2`}>
+                  <td className="py-2 px-3 text-[13px] text-muted tabular-nums">{item.id}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground font-medium">{item.nome}</td>
+                  <td className="py-2 px-3 text-[13px] text-secondary">{item.categoria}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground text-right tabular-nums">{item.quantidade}</td>
+                  <td className="py-2 px-3 text-[13px] text-secondary">{item.unidade}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground text-right tabular-nums">{formatarMoeda(item.preco_unitario)}</td>
+                  <td className="py-2 px-3 text-[13px] text-secondary">{item.lote || '—'}</td>
+                  <td className="py-2 px-3 text-[13px] text-secondary tabular-nums">{formatarData(item.data_validade)}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground text-right tabular-nums">{item.estoque_minimo}</td>
                   <td className="py-2 px-3 text-center space-x-2">
                     <button
                       onClick={() => setEditandoId(editandoId === item.id ? null : item.id)}
-                      className="text-navy-blue hover:underline text-xs font-semibold"
+                      className="text-accent hover:underline text-[12px] font-medium"
                     >
                       {editandoId === item.id ? 'Fechar' : 'Editar'}
                     </button>
                     <button
                       onClick={() => setExcluindo(item.id)}
-                      className="text-red-600 hover:underline text-xs font-semibold"
+                      className="text-red-600 hover:underline text-[12px] font-medium"
                     >
                       Excluir
                     </button>
@@ -149,8 +149,8 @@ export default function Listar() {
       )}
 
       {editandoId && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-navy-dark font-bold text-lg mb-4">Editar Item #{editandoId}</h3>
+        <div className="bg-surface border border-border rounded-md p-4">
+          <h3 className="text-foreground font-semibold text-[14px] mb-3">Editar Item #{editandoId}</h3>
           <ItemForm
             initial={itens.find((i) => i.id === editandoId)}
             onSubmit={handleEditar}

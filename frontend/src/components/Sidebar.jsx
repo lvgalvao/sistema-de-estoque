@@ -1,44 +1,53 @@
 import { NavLink } from 'react-router-dom';
 
 const links = [
-  { to: '/', label: 'Dashboard', icon: '🏠' },
-  { to: '/cadastrar', label: 'Cadastrar Item', icon: '➕' },
-  { to: '/listar', label: 'Listar Itens', icon: '📋' },
-  { to: '/movimentacoes', label: 'Movimentações', icon: '🔄' },
-  { to: '/historico', label: 'Histórico', icon: '📊' },
+  { to: '/', label: 'Dashboard' },
+  { to: '/cadastrar', label: 'Cadastrar Item' },
+  { to: '/listar', label: 'Listar Itens' },
+  { to: '/movimentacoes', label: 'Movimentações' },
+  { to: '/historico', label: 'Histórico' },
 ];
 
 export default function Sidebar() {
   return (
-    <aside className="fixed top-0 left-0 h-screen w-60 bg-navy-dark flex flex-col z-20">
-      <div className="flex flex-col items-center py-6 px-4">
-        <img src="/logo.png" alt="Logo" className="w-36 mb-1" />
-        <span className="text-[0.65rem] text-navy-light tracking-wide">
-          Sistema de Controle de Estoque
+    <aside className="fixed top-0 left-0 h-screen w-52 bg-surface border-r border-border flex flex-col z-20">
+      <div className="flex flex-col items-center gap-2 px-4 py-4">
+        <img src="/logo.png" alt="Logo Marinha" className="h-10 object-contain" />
+        <span className="text-foreground font-semibold text-[11px] uppercase tracking-wide">
+          Controle de Estoque
         </span>
       </div>
 
-      <hr className="border-white/15 mx-4" />
-
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav className="flex-1 px-2 py-1 space-y-0.5">
         {links.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
             end={link.to === '/'}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center px-3 py-1.5 rounded text-[13px] font-medium transition-colors ${
                 isActive
-                  ? 'bg-navy-blue text-white'
-                  : 'text-white/80 hover:bg-white/10'
+                  ? 'bg-accent/8 text-accent'
+                  : 'text-secondary hover:bg-black/4 hover:text-foreground'
               }`
             }
           >
-            <span>{link.icon}</span>
-            <span>{link.label}</span>
+            {link.label}
           </NavLink>
         ))}
       </nav>
+
+      <div className="border-t border-border px-3 py-3">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex items-center justify-center text-[12px] font-semibold shrink-0">
+            LV
+          </div>
+          <div className="min-w-0">
+            <p className="text-[12px] font-medium text-foreground truncate">Luciano Vasconcelos</p>
+            <p className="text-[11px] text-muted truncate">Suporte</p>
+          </div>
+        </div>
+      </div>
     </aside>
   );
 }

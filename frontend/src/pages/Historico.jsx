@@ -49,22 +49,22 @@ export default function Historico() {
   };
 
   const inputClass =
-    'border border-navy-light rounded-md px-3 py-2 text-sm focus:outline-none focus:border-navy-blue focus:ring-1 focus:ring-navy-blue';
+    'border border-border rounded h-8 px-3 text-[13px] text-foreground bg-surface focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20';
+
+  const thClass = 'text-left py-2 px-3 text-[11px] font-semibold text-muted uppercase tracking-wide';
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-navy-dark text-2xl font-bold border-b-3 border-yellow-gov pb-2">
-        Histórico de Movimentações
-      </h2>
+    <div className="space-y-4">
+      <h2 className="text-foreground text-base font-semibold">Histórico de Movimentações</h2>
 
-      <div className="flex flex-wrap gap-4">
-        <select name="item_id" value={filtros.item_id} onChange={handleChange} className={`${inputClass} w-52`}>
+      <div className="flex flex-wrap gap-2">
+        <select name="item_id" value={filtros.item_id} onChange={handleChange} className={`${inputClass} w-44`}>
           <option value="">Todos os itens</option>
           {itens.map((item) => (
             <option key={item.id} value={item.id}>{item.nome}</option>
           ))}
         </select>
-        <select name="tipo" value={filtros.tipo} onChange={handleChange} className={`${inputClass} w-40`}>
+        <select name="tipo" value={filtros.tipo} onChange={handleChange} className={`${inputClass} w-36`}>
           <option value="">Todos os tipos</option>
           <option value="entrada">Entrada</option>
           <option value="saida">Saída</option>
@@ -86,34 +86,34 @@ export default function Historico() {
       </div>
 
       {loading ? (
-        <p className="text-gray-500">Carregando...</p>
+        <p className="text-muted text-[13px]">Carregando...</p>
       ) : movimentacoes.length === 0 ? (
-        <p className="text-gray-500">Nenhuma movimentação encontrada.</p>
+        <p className="text-muted text-[13px]">Nenhuma movimentação encontrada.</p>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="bg-surface border border-border rounded-md overflow-x-auto">
+          <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Data</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Item</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Tipo</th>
-                <th className="text-right py-3 px-3 text-navy-mid font-semibold">Quantidade</th>
-                <th className="text-left py-3 px-3 text-navy-mid font-semibold">Observação</th>
+              <tr className="border-b border-faint">
+                <th className={thClass}>Data</th>
+                <th className={thClass}>Item</th>
+                <th className={thClass}>Tipo</th>
+                <th className={`${thClass} text-right`}>Quantidade</th>
+                <th className={thClass}>Observação</th>
               </tr>
             </thead>
             <tbody>
               {movimentacoes.map((mov) => (
                 <tr
                   key={mov.id}
-                  className={`border-b border-gray-100 ${
+                  className={`border-b border-faint last:border-0 ${
                     mov.tipo === 'entrada' ? 'bg-alert-green' : 'bg-alert-red'
                   }`}
                 >
-                  <td className="py-2 px-3">{formatarDataHora(mov.data_movimentacao)}</td>
-                  <td className="py-2 px-3 font-medium">{mov.item_nome}</td>
+                  <td className="py-2 px-3 text-[13px] text-secondary tabular-nums">{formatarDataHora(mov.data_movimentacao)}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground font-medium">{mov.item_nome}</td>
                   <td className="py-2 px-3">
                     <span
-                      className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
+                      className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium ${
                         mov.tipo === 'entrada'
                           ? 'bg-green-100 text-green-800'
                           : 'bg-red-100 text-red-800'
@@ -122,8 +122,8 @@ export default function Historico() {
                       {mov.tipo === 'entrada' ? 'Entrada' : 'Saída'}
                     </span>
                   </td>
-                  <td className="py-2 px-3 text-right">{mov.quantidade}</td>
-                  <td className="py-2 px-3 text-gray-600">{mov.observacao || '—'}</td>
+                  <td className="py-2 px-3 text-[13px] text-foreground text-right tabular-nums">{mov.quantidade}</td>
+                  <td className="py-2 px-3 text-[13px] text-muted">{mov.observacao || '—'}</td>
                 </tr>
               ))}
             </tbody>

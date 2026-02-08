@@ -54,18 +54,18 @@ export default function ItemForm({ initial, onSubmit, submitLabel = 'Salvar' }) 
   };
 
   const inputClass =
-    'w-full border border-navy-light rounded-md px-3 py-2 text-sm focus:outline-none focus:border-navy-blue focus:ring-1 focus:ring-navy-blue';
-  const labelClass = 'block text-sm font-semibold text-navy-mid mb-1';
+    'w-full border border-border rounded h-8 px-3 text-[13px] text-foreground bg-surface focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20';
+  const labelClass = 'block text-[11px] font-semibold text-muted uppercase tracking-wide mb-1';
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-3">
       {erro && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-md text-sm">
+        <div className="bg-alert-red border border-red-200 text-red-700 px-3 py-2 rounded text-[13px]">
           {erro}
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <label className={labelClass}>Nome *</label>
           <input name="nome" value={form.nome} onChange={handleChange} className={inputClass} />
@@ -108,11 +108,11 @@ export default function ItemForm({ initial, onSubmit, submitLabel = 'Salvar' }) 
         </div>
       </div>
 
-      <div className="pt-2">
+      <div className="pt-1">
         <button
           type="submit"
           disabled={loading}
-          className="bg-navy-blue text-white px-6 py-2.5 rounded-md font-semibold text-sm hover:bg-navy-mid transition-colors disabled:opacity-50"
+          className="h-8 px-3 bg-accent text-white rounded text-[13px] font-medium hover:bg-accent-hover transition-colors disabled:opacity-50"
         >
           {loading ? 'Salvando...' : submitLabel}
         </button>

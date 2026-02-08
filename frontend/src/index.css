@@ -1,22 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-dark: #071D41;
-  --color-navy-mid: #0C326F;
-  --color-navy-blue: #1351B4;
-  --color-navy-light: #C5D4EB;
-  --color-green-gov: #168821;
-  --color-yellow-gov: #FFCD07;
-  --color-alert-red: #ffcccc;
-  --color-alert-yellow: #ffffcc;
-  --color-alert-green: #ccffcc;
-  --color-gray-bg: #F8F9FA;
+  /* Design System: Precision & Density */
+  --color-foreground: #0f172a;
+  --color-secondary: #475569;
+  --color-muted: #94a3b8;
+  --color-faint: #e2e8f0;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-surface: #ffffff;
+  --color-bg: #f8fafc;
+
+  /* Alert colors (subtle) */
+  --color-alert-red: #fef2f2;
+  --color-alert-yellow: #fefce8;
+  --color-alert-green: #f0fdf4;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--color-gray-bg);
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-foreground);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Scrollbar */
@@ -27,6 +35,6 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-navy-light);
+  background: var(--color-faint);
   border-radius: 3px;
 }

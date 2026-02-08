@@ -39,7 +39,6 @@ export default function Movimentacoes() {
       });
       setMensagem('Movimentação registrada com sucesso!');
       setForm({ item_id: '', tipo: 'entrada', quantidade: '', observacao: '' });
-      // Refresh item list (quantities may have changed)
       const updated = await api.listarItens();
       setItens(updated);
       setTimeout(() => setMensagem(''), 3000);
@@ -51,29 +50,27 @@ export default function Movimentacoes() {
   };
 
   const inputClass =
-    'w-full border border-navy-light rounded-md px-3 py-2 text-sm focus:outline-none focus:border-navy-blue focus:ring-1 focus:ring-navy-blue';
-  const labelClass = 'block text-sm font-semibold text-navy-mid mb-1';
+    'w-full border border-border rounded h-8 px-3 text-[13px] text-foreground bg-surface focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20';
+  const labelClass = 'block text-[11px] font-semibold text-muted uppercase tracking-wide mb-1';
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-navy-dark text-2xl font-bold border-b-3 border-yellow-gov pb-2">
-        Movimentações
-      </h2>
+    <div className="space-y-4">
+      <h2 className="text-foreground text-base font-semibold">Movimentações</h2>
 
       {mensagem && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-2 rounded-md text-sm">
+        <div className="bg-alert-green border border-green-200 text-green-700 px-3 py-2 rounded text-[13px]">
           {mensagem}
         </div>
       )}
       {erro && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-md text-sm">
+        <div className="bg-alert-red border border-red-200 text-red-700 px-3 py-2 rounded text-[13px]">
           {erro}
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="bg-surface border border-border rounded-md p-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Item *</label>
               <select name="item_id" value={form.item_id} onChange={handleChange} className={inputClass}>
@@ -87,28 +84,28 @@ export default function Movimentacoes() {
             </div>
             <div>
               <label className={labelClass}>Tipo *</label>
-              <div className="flex gap-4 pt-2">
-                <label className="flex items-center gap-2 cursor-pointer">
+              <div className="flex gap-4 h-8 items-center">
+                <label className="flex items-center gap-1.5 cursor-pointer">
                   <input
                     type="radio"
                     name="tipo"
                     value="entrada"
                     checked={form.tipo === 'entrada'}
                     onChange={handleChange}
-                    className="accent-navy-blue"
+                    className="accent-accent"
                   />
-                  <span className="text-sm font-medium text-green-700">Entrada</span>
+                  <span className="text-[13px] font-medium text-green-700">Entrada</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-1.5 cursor-pointer">
                   <input
                     type="radio"
                     name="tipo"
                     value="saida"
                     checked={form.tipo === 'saida'}
                     onChange={handleChange}
-                    className="accent-navy-blue"
+                    className="accent-accent"
                   />
-                  <span className="text-sm font-medium text-red-600">Saída</span>
+                  <span className="text-[13px] font-medium text-red-600">Saída</span>
                 </label>
               </div>
             </div>
@@ -136,11 +133,11 @@ export default function Movimentacoes() {
             </div>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               type="submit"
               disabled={loading}
-              className="bg-navy-blue text-white px-6 py-2.5 rounded-md font-semibold text-sm hover:bg-navy-mid transition-colors disabled:opacity-50"
+              className="h-8 px-3 bg-accent text-white rounded text-[13px] font-medium hover:bg-accent-hover transition-colors disabled:opacity-50"
             >
               {loading ? 'Registrando...' : 'Registrar'}
             </button>

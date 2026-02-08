@@ -1,10 +1,8 @@
 export default function Topbar() {
   return (
-    <>
-      <div className="bg-white border-b border-navy-light px-6 py-3 flex items-center gap-4">
-        <img src="/logo.png" alt="Logo" className="h-10 object-contain" />
-      </div>
-      <div className="h-[3px] bg-gradient-to-r from-yellow-gov to-green-gov" />
-    </>
+    <div className="bg-surface border-b border-border px-6 h-10 flex items-center justify-between">
+      <span className="text-[13px] text-muted font-medium">Almoxarifado</span>
+      <span className="text-[11px] text-muted">Marinha do Brasil</span>
+    </div>
   );
 }
