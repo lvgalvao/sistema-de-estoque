@@ -1,9 +1,9 @@
-run = "cd frontend && npm install && npm run build && cd ../backend && npm install && node server.js"
+run = "npm run install:all && npm run build && npm start"
 entrypoint = "backend/server.js"
 
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "cd backend && node server.js"]
-build = ["sh", "-c", "cd frontend && npm install && npm run build && cd ../backend && npm install"]
+run = ["sh", "-c", "npm start"]
+build = ["sh", "-c", "npm run install:all && npm run build"]
