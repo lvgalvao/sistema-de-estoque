@@ -1,0 +1,9 @@
+run = "cd frontend && npm install && npm run build && cd ../backend && npm install && node server.js"
+entrypoint = "backend/server.js"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "cd backend && node server.js"]
+build = ["sh", "-c", "cd frontend && npm install && npm run build && cd ../backend && npm install"]
